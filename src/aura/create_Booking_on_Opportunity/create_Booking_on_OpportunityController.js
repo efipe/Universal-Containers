@@ -10,8 +10,8 @@
 			{label:"Name", fieldName:"Name", type:"text"},
 			{label:"Departure Date", fieldName:"Departure_date__c", type:"text"},
 			{label:"Arrival Date", fieldName:"Arrival_date__c", type:"text"},
-			{label:"Route", fieldName:"Route__c", type:"text"},
-			{label:"Vessel", fieldName:"Vessel__c", type:"text"}
+			{label:"Route", fieldName:"Route__r.Name", type:"text"},
+			{label:"Vessel", fieldName:"Vessel__c.Name", type:"text"}
 		]);
 
 	// send the parameters from attributes to Apex Controller method
@@ -31,12 +31,12 @@
 	},
 
 	onSelectedSchedule : function (component, event, helper){
-
+	// returning the list of records selected in table
 		var selectedRows = event.getParam('selectedRows');
-
 		component.set("v.isScheduleSelected", "true");
 		component.set("v.selectedSchedule", selectedRows[0].Id);
-		console.log(selectedRows[0].Id);
+		console.log(selectedRows[0]);
+
 	},
 
 	createBooking : function (component, event, helper){
