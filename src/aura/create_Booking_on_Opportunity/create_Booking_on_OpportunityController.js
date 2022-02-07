@@ -22,7 +22,7 @@
 			arrival: String(component.get("v.arrivalPort"))
 		});
 
-	// return the result of Apex Controller method
+	// return the result of Apex Controller method and change the boolean value to display table
 		getListOfPossibleSchedules.setCallback(this, function(data) {
 			component.set("v.Schedule", data.getReturnValue());
 			component.set("v.isTableReady", "True")
