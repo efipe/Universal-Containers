@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Vessel</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Vessels</value>
+    </caseValues>
+    <fields>
+        <help><!-- Deadweight of the vessel measured in tonnes --></help>
+        <label><!-- Deadweight --></label>
+        <name>Deadweight__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lenght --></label>
+        <name>Lenght__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vessel owner --></label>
+        <name>Vessel_owner__c</name>
+        <relationshipLabel><!-- Vessels --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Width --></label>
+        <name>Width__c</name>
+    </fields>
+    <fields>
+        <help><!-- maximum TEU of the vessel --></help>
+        <label><!-- max TEU --></label>
+        <name>max_TEU__c</name>
+    </fields>
+    <fields>
+        <label><!-- year of build --></label>
+        <name>year_of_build__c</name>
+    </fields>
+    <layouts>
+        <layout>Vessel Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

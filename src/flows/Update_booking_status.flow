@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <assignments>
+        <name>Set_status_of_the_current_booking</name>
+        <label>Set status of the current booking</label>
+        <locationX>1109</locationX>
+        <locationY>202</locationY>
+        <assignmentItems>
+            <assignToReference>Iterate_over_bookings.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Booked</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Booking_status</targetReference>
+        </connector>
+    </assignments>
+    <interviewLabel>Update booking status {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update booking status</label>
+    <loops>
+        <name>Iterate_over_bookings</name>
+        <label>Iterate over bookings</label>
+        <locationX>568</locationX>
+        <locationY>501</locationY>
+        <collectionReference>Get_Bookings_for_Opportunity</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Set_status_of_the_current_booking</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Bookings_for_Opportunity</name>
+        <label>Get Bookings for Opportunity</label>
+        <locationX>567</locationX>
+        <locationY>324</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Iterate_over_bookings</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Opportunity__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Schedule_booking__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Booking_status</name>
+        <label>Update Booking status</label>
+        <locationX>1109</locationX>
+        <locationY>494</locationY>
+        <connector>
+            <targetReference>Iterate_over_bookings</targetReference>
+        </connector>
+        <inputReference>Iterate_over_bookings</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>442</locationX>
+        <locationY>11</locationY>
+        <connector>
+            <targetReference>Get_Bookings_for_Opportunity</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>StageName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Closed Won</stringValue>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

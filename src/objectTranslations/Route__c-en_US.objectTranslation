@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Route</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Routes</value>
+    </caseValues>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>IsActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Port of Destination --></label>
+        <name>Port_of_Destination__c</name>
+        <relationshipLabel><!-- Routes (Port of Destination) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Port of Origin --></label>
+        <name>Port_of_Origin__c</name>
+        <relationshipLabel><!-- Routes --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Route Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- New Route --></label>
+        <name>New_Route</name>
+    </quickActions>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

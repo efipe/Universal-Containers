@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Closed_Won_for_CS</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Closed Won for CS</label>
+        <sharedTo>
+            <role>SVPCustomerServiceSupport</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>StageName</field>
+            <operation>equals</operation>
+            <value>Closed Won</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Sales_Operations</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Read + write for Sales Operations role</description>
+        <label>Sales Operations</label>
+        <sharedTo>
+            <role>Sales_Operations</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

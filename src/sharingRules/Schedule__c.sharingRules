@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>RW_access_for_GRM_group</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>RW access for GRM group</label>
+        <sharedTo>
+            <group>Global_Routes_Management</group>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>
