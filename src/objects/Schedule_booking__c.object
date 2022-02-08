@@ -160,17 +160,24 @@
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ControlledByParent</externalSharingModel>
     <fields>
-        <fullName>Customer__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
+        <fullName>Booking_name__c</fullName>
+        <displayFormat>PO# {00000000}</displayFormat>
         <externalId>false</externalId>
-        <label>Customer</label>
-        <referenceTo>Account</referenceTo>
-        <relationshipLabel>Scheduled bookings</relationshipLabel>
-        <relationshipName>Scheduled_bookings</relationshipName>
+        <label>Booking name</label>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Declared_Teu__c</fullName>
+        <externalId>false</externalId>
+        <label>Declared Teu</label>
+        <precision>18</precision>
         <required>false</required>
+        <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
         <trackTrending>false</trackTrending>
-        <type>Lookup</type>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Opportunity__c</fullName>
@@ -235,6 +242,47 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
+    <fields>
+        <fullName>Type_of_goods__c</fullName>
+        <externalId>false</externalId>
+        <label>Type of goods</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Electronics</fullName>
+                    <default>false</default>
+                    <label>Electronics</label>
+                </value>
+                <value>
+                    <fullName>Food</fullName>
+                    <default>false</default>
+                    <label>Food</label>
+                </value>
+                <value>
+                    <fullName>Textile</fullName>
+                    <default>false</default>
+                    <label>Textile</label>
+                </value>
+                <value>
+                    <fullName>Fragile</fullName>
+                    <default>false</default>
+                    <label>Fragile</label>
+                </value>
+                <value>
+                    <fullName>Dangerous</fullName>
+                    <default>false</default>
+                    <label>Dangerous</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
     <label>Schedule booking</label>
     <listViews>
         <fullName>All</fullName>
@@ -242,9 +290,10 @@
         <label>All</label>
     </listViews>
     <nameField>
+        <displayFormat>PO# {00000000}</displayFormat>
         <label>Schedule booking Name</label>
         <trackFeedHistory>true</trackFeedHistory>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Scheduled bookings</pluralLabel>
     <searchLayouts/>

@@ -69,7 +69,6 @@
         <fields>NAME</fields>
         <fields>Opportunity.Declared_TEU__c</fields>
         <fields>Opportunity.OPP_AMOUNT</fields>
-        <fields>Customer__c</fields>
         <relatedList>Schedule_booking__c.Schedule__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>

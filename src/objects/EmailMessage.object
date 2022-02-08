@@ -143,6 +143,13 @@
         <fullName>Subject</fullName>
     </fields>
     <fields>
+        <fullName>Task_end_date__c</fullName>
+        <externalId>false</externalId>
+        <label>Task end date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>TextBody</fullName>
     </fields>
     <fields>

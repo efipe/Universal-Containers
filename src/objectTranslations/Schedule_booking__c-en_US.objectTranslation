@@ -9,9 +9,12 @@
         <value>Scheduled bookings</value>
     </caseValues>
     <fields>
-        <label><!-- Customer --></label>
-        <name>Customer__c</name>
-        <relationshipLabel><!-- Scheduled bookings --></relationshipLabel>
+        <label><!-- Booking name --></label>
+        <name>Booking_name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Declared Teu --></label>
+        <name>Declared_Teu__c</name>
     </fields>
     <fields>
         <label><!-- Opportunity --></label>
@@ -41,6 +44,30 @@
         <picklistValues>
             <masterLabel>Rejected</masterLabel>
             <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Type of goods --></label>
+        <name>Type_of_goods__c</name>
+        <picklistValues>
+            <masterLabel>Dangerous</masterLabel>
+            <translation><!-- Dangerous --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Electronics</masterLabel>
+            <translation><!-- Electronics --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Food</masterLabel>
+            <translation><!-- Food --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fragile</masterLabel>
+            <translation><!-- Fragile --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Textile</masterLabel>
+            <translation><!-- Textile --></translation>
         </picklistValues>
     </fields>
     <layouts>

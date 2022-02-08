@@ -5,13 +5,14 @@
 	// assign a method from Apex Controller to variable in JavaScript controller
 		var getListOfPossibleSchedules = component.get("c.getSchedules");
 
+
 	// prepare the table pool
 		component.set("v.Columns",[
 			{label:"Name", fieldName:"Name", type:"text"},
 			{label:"Departure Date", fieldName:"Departure_date__c", type:"text"},
 			{label:"Arrival Date", fieldName:"Arrival_date__c", type:"text"},
-			{label:"Route", fieldName:"Route__r.Name", type:"text"},
-			{label:"Vessel", fieldName:"Vessel__c.Name", type:"text"}
+			{label:"Route", fieldName:"Route__c", type:"text"},
+			{label:"Vessel", fieldName:"Vessel__c", type:"text"}
 		]);
 
 	// send the parameters from attributes to Apex Controller method
@@ -27,7 +28,7 @@
 			component.set("v.Schedule", data.getReturnValue());
 			component.set("v.isTableReady", "True")
 		});
-		$A.enqueueAction(getListOfPossibleSchedules);
+		console.log($A.enqueueAction(getListOfPossibleSchedules));
 	},
 
 	onSelectedSchedule : function (component, event, helper){

@@ -18,11 +18,6 @@
         <relationshipLabel><!-- Contracts --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Schedule --></label>
-        <name>Schedule__c</name>
-        <relationshipLabel><!-- Contracts --></relationshipLabel>
-    </fields>
-    <fields>
         <label><!-- Start Date --></label>
         <name>Start_Date__c</name>
     </fields>

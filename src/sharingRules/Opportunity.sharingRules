@@ -12,6 +12,7 @@
             <operation>equals</operation>
             <value>Closed Won</value>
         </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
     <sharingOwnerRules>
         <fullName>Sales_Operations</fullName>

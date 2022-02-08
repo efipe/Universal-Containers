@@ -17,11 +17,6 @@
         <name>Departure_date__c</name>
     </fields>
     <fields>
-        <label><!-- Opportunity --></label>
-        <name>Opportunity__c</name>
-        <relationshipLabel><!-- Schedules --></relationshipLabel>
-    </fields>
-    <fields>
         <label><!-- Route --></label>
         <name>Route__c</name>
         <relationshipLabel><!-- Schedules --></relationshipLabel>

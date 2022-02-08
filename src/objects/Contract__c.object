@@ -174,18 +174,6 @@
         <type>Lookup</type>
     </fields>
     <fields>
-        <fullName>Schedule__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <externalId>false</externalId>
-        <label>Schedule</label>
-        <referenceTo>Schedule__c</referenceTo>
-        <relationshipLabel>Contracts</relationshipLabel>
-        <relationshipName>Contract_schedule</relationshipName>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <fields>
         <fullName>Start_Date__c</fullName>
         <externalId>false</externalId>
         <label>Start Date</label>
