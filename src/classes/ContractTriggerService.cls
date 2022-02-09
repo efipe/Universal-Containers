@@ -4,14 +4,28 @@
 
 public with sharing class ContractTriggerService {
 
-    public static Task closeTask(Task receivedTask) {
-        if (receivedTask.Type__c == 'Contract creation notification') {
-            receivedTask.Id = receivedTask.Id;
-            receivedTask.isClosed__c = true;
-            receivedTask.Task_closure_date__c = Date.today();
-
+    public static List<Task> closeTask(List<Task> receivedTasks) {
+        for (Task task : receivedTasks) {
+            if (task.Type__c == 'Contract creation notification') {
+                task.Id = task.Id;
+                task.isClosed__c = true;
+                task.Task_closure_date__c = Date.today();
+            }
         }
-        return receivedTask;
+        return receivedTasks;
+    }
+
+    public static List<Task> queryTasksByOpportunities(List<Id> opportunitiesID) {
+        List<Task> queriedTasks = [SELECT Id, Type__c, isClosed__c, Task_closure_date__c FROM Task WHERE WhatId = :opportunitiesID];
+        return queriedTasks;
+    }
+
+    public static List<Id> getRelatedOpportunities(List<Contract__c> contracts) {
+        List<Id> opportunitiesId = new List<Id>();
+        for (Contract__c contract : contracts) {
+            opportunitiesId.add(contract.Opportunity__c);
+        }
+        return opportunitiesId;
     }
 
 }
