@@ -3,8 +3,11 @@
  */
 
 trigger OpportunityTrigger on Opportunity (before update, after update) {
+
     if (Trigger.isBefore) {
 
+    }
+    if (Trigger.isAfter) {
         if (Trigger.isUpdate) {
             List<Task> newTasksToAdd = new List<Task>();
             Task newTaskCreated = new Task();
@@ -20,8 +23,12 @@ trigger OpportunityTrigger on Opportunity (before update, after update) {
                     newTasksToAdd.add(newTaskCreated);
                 }
             }
-            insert newTasksToAdd;
+            if (newTasksToAdd.size() > 0) {
+                insert newTasksToAdd;
+            }
+
         }
+
 
     }
 }
