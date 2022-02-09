@@ -1,4 +1,4 @@
-<aura:component controller="FindRoutes"
+<aura:component controller="FindSchedules"
                 implements="force:hasRecordId,lightning:actionOverride,force:lightningQuickAction">
 
     <aura:attribute name="recordId" type="String"/>
@@ -13,6 +13,8 @@
     <aura:attribute name="isScheduleFound" type="Boolean" default="false"/>
     <aura:attribute name="isScheduleSelected" type="Boolean" default="false"/>
     <aura:attribute name="selectedSchedule" type="String"/>
+    <aura:attribute name="isSpinnerNeeded" type="Boolean" default="false"/>
+
 
     <!-- 1st form - Enter dates & ports to look for a schedule -->
     <lightning:card title="Schedule a Booking">
@@ -29,9 +31,9 @@
     <!-- check if boolean isTrue and then draw table -->
 
     <aura:if isTrue="{!v.isSecondFormReady}">
-
         <aura:if isTrue="{!v.isScheduleFound}">
-            <lightning:datatable data="{!v.Schedule}" onrowselection="{!c.onSelectedSchedule}" columns="{!v.Columns }"
+            <lightning:datatable data="{!v.Schedule}" onrowselection="{!c.onSelectedSchedule}"
+                                 columns="{!v.Columns }"
                                  keyField="Id" maxRowSelection="{!v.maxRowSelection}"/>
 
             <!-- Second Form and check if another boolean isTrue  -->
@@ -56,5 +58,7 @@
         </aura:if>
 
     </aura:if>
+
+
 </aura:component>
 

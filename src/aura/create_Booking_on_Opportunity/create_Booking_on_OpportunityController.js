@@ -6,13 +6,14 @@
         var getListOfPossibleSchedules = component.get("c.getSchedules");
         var returnedSchedules;
 
+
         // prepare the table pool
         component.set("v.Columns", [
-            {label: "Name", fieldName: "Name", type: "text"},
-            {label: "Departure Date", fieldName: "Departure_date__c", type: "text"},
-            {label: "Arrival Date", fieldName: "Arrival_date__c", type: "text"},
-            {label: "Route", fieldName: "Route__c", type: "text"},
-            {label: "Vessel", fieldName: "Vessel__c", type: "text"}
+            {label: "Name", fieldName: "scheduleName", type: "text"},
+            {label: "Departure Date", fieldName: "scheduleStartDate", type: "text"},
+            {label: "Arrival Date", fieldName: "scheduleEndDate", type: "text"},
+            {label: "Route", fieldName: "routeName", type: "text"},
+            {label: "Vessel", fieldName: "vesselName", type: "text"}
         ]);
 
         // send the parameters from attributes to Apex Controller method
@@ -24,11 +25,14 @@
         });
 
         // return the result of Apex Controller method and change the boolean value to display 2nd part of form
+
+
         getListOfPossibleSchedules.setCallback(this, function (data) {
+
+
             returnedSchedules = data.getReturnValue();
             component.set("v.Schedule", data.getReturnValue());
             component.set("v.isSecondFormReady", "True");
-
             console.log(returnedSchedules.length);
 
             if (returnedSchedules.length > 0) {
@@ -38,9 +42,9 @@
                 console.log("Schedule NOT FOUND")
                 component.set("v.isScheduleFound", false);
             }
+            component.set("v.isSpinnerNeeded", "false");
         });
         $A.enqueueAction(getListOfPossibleSchedules);
-
     },
 
     onSelectedSchedule: function (component, event, helper) {
