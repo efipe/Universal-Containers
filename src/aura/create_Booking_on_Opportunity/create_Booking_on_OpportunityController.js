@@ -51,7 +51,7 @@
         // returning the list of records selected in table
         var selectedRows = event.getParam('selectedRows');
         component.set("v.isScheduleSelected", "true");
-        component.set("v.selectedSchedule", selectedRows[0].Id);
+        component.set("v.selectedSchedule", selectedRows[0].id);
         console.log(selectedRows[0]);
 
     },

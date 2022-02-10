@@ -4,31 +4,19 @@
 
 trigger OpportunityTrigger on Opportunity (before update, after update) {
 
-    if (Trigger.isBefore) {
-
-    }
     if (Trigger.isAfter) {
         if (Trigger.isUpdate) {
             List<Task> newTasksToAdd = new List<Task>();
-            Task newTaskCreated = new Task();
+            List<Opportunity> updatedOpportunities = Trigger.new;
+            OpportunityTriggerService opportunityTriggerService = new OpportunityTriggerService();
 
-            for (Opportunity opportunity : Trigger.new) {
+            newTasksToAdd = opportunityTriggerService.createNewTaskForOpportunity(updatedOpportunities);
 
-                if (opportunity.StageName == 'Closed Won') {
-                    String taskName = 'Create contract for opportunity ' + opportunity.Name;
-                    newTaskCreated.OwnerId = opportunity.OwnerId;
-                    newTaskCreated.Subject = taskName;
-                    newTaskCreated.WhatId = opportunity.Id;
-                    newTaskCreated.ActivityDate = Date.today() + 14;
-                    newTasksToAdd.add(newTaskCreated);
-                }
-            }
+
+
             if (newTasksToAdd.size() > 0) {
                 insert newTasksToAdd;
             }
-
         }
-
-
     }
 }

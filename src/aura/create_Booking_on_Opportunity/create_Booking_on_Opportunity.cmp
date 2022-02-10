@@ -2,7 +2,7 @@
                 implements="force:hasRecordId,lightning:actionOverride,force:lightningQuickAction">
 
     <aura:attribute name="recordId" type="String"/>
-    <aura:attribute name="Schedule" type="Schedule__c"/>
+    <aura:attribute name="Schedule" type="ScheduleWrapper"/>
     <aura:attribute name="Columns" type="List"/>
     <aura:attribute name="maxRowsSelection" type="Integer" default="1"/>
     <aura:attribute name="scheduleStartDate" type="Date"/>

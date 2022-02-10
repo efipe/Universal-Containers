@@ -6,6 +6,12 @@ public with sharing class FindSchedules {
     @AuraEnabled
     public static List<ScheduleWrapper> getSchedules(Date startDate, Date endDate, String departure, String arrival) {
         System.debug(startDate);
+        StringQueryBuilder stringQueryBuilder = new StringQueryBuilder();
+
+        String query = stringQueryBuilder.buildQuery(startDate, endDate, departure, arrival);
+
+        System.debug(query);
+
         List<Schedule__c> schedules = [
                 SELECT Id,
                         Name,
@@ -24,10 +30,12 @@ public with sharing class FindSchedules {
                 AND Route__r.Port_of_Destination__c = :arrival
         ];
 
-        List<ScheduleWrapper> wrappedSchedules = FindSchedules.getRelatedObjectsNames(schedules);
 
+        List<ScheduleWrapper> wrappedSchedules = FindSchedules.getRelatedObjectsNames(schedules);
         return wrappedSchedules;
+
     }
+
 
     public static List<ScheduleWrapper> getRelatedObjectsNames(List<Schedule__c> scheds) {
         ScheduleWrapper wrapper = new ScheduleWrapper();
