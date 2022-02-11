@@ -3,32 +3,32 @@
  */
 
 public with sharing class FindSchedules {
+
     @AuraEnabled
     public static List<ScheduleWrapper> getSchedules(Date startDate, Date endDate, String departure, String arrival) {
-        System.debug(startDate);
+
         StringQueryBuilder stringQueryBuilder = new StringQueryBuilder();
 
-        String query = stringQueryBuilder.buildQuery(startDate, endDate, departure, arrival);
+        String query = stringQueryBuilder
+                .addField('Id')
+                .addField('Name')
+                .addField('Route__r.Name')
+                .addField('Vessel__r.Name')
+                .addField('Departure_date__c')
+                .addField('Arrival_date__c')
+                .addField('Route__r.Port_of_Origin__c')
+                .addField('Route__r.Port_of_Destination__c')
+                .fromx('Schedule__c')
+                .addWhere('Departure_date__c', startDate, '=' )
+                .addWhere('Arrival_date__c', endDate, '=')
+                .addWhere('Route__r.Port_of_Origin__c', departure, '=')
+                .addWhere('Route__r.Port_of_Destination__c', arrival, '=')
+                .build();
 
         System.debug(query);
 
-        List<Schedule__c> schedules = [
-                SELECT Id,
-                        Name,
-                        Route__r.Name,
-                        Vessel__r.Name,
-                        Departure_date__c,
-                        Arrival_date__c,
-                        Route__r.Port_of_Origin__c,
-                        Route__r.Port_of_Destination__c
+        List<Schedule__c> schedules = stringQueryBuilder.query();
 
-                FROM Schedule__c
-                WHERE
-                Departure_date__c = :startDate
-                AND Arrival_date__c = :endDate
-                AND Route__r.Port_of_Origin__c = :departure
-                AND Route__r.Port_of_Destination__c = :arrival
-        ];
 
 
         List<ScheduleWrapper> wrappedSchedules = FindSchedules.getRelatedObjectsNames(schedules);

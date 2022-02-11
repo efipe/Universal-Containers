@@ -18,10 +18,10 @@
 
         // send the parameters from attributes to Apex Controller method
         getListOfPossibleSchedules.setParams({
-            startDate: component.get("v.scheduleStartDate"),
-            endDate: component.get("v.scheduleEndDate"),
-            departure: String(component.get("v.departurePort")),
-            arrival: String(component.get("v.arrivalPort"))
+            startDate: !component.get("v.scheduleStartDate") ? null : component.get("v.scheduleStartDate"),
+            endDate: !component.get("v.scheduleEndDate") ? null : component.get("v.scheduleEndDate"),
+            departure: !component.get("v.departurePort") ? null : String(component.get("v.departurePort")),
+            arrival: !component.get("v.arrivalPort") ? null : String(component.get("v.arrivalPort"))
         });
 
         // return the result of Apex Controller method and change the boolean value to display 2nd part of form

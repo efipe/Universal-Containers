@@ -12,8 +12,6 @@ trigger OpportunityTrigger on Opportunity (before update, after update) {
 
             newTasksToAdd = opportunityTriggerService.createNewTaskForOpportunity(updatedOpportunities);
 
-
-
             if (newTasksToAdd.size() > 0) {
                 insert newTasksToAdd;
             }

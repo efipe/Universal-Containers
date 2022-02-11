@@ -7,14 +7,19 @@ trigger ContractTrigger on Contract__c (before insert, before update, before del
     if (Trigger.isAfter) {
         if (Trigger.isInsert) {
             List<Contract__c> contractsUploaded = Trigger.new;
-            List<Task> tasksToUpdate = new List<Task>();
+
             ContractTriggerService contractTriggerService = new ContractTriggerService();
 
             List<String> opportunityIDs = contractTriggerService.getRelatedOpportunities(contractsUploaded);
 
             List<Task> queriedTasksByIds = contractTriggerService.queryTasksByOpportunities(opportunityIDs);
 
-            update tasksToUpdate = contractTriggerService.closeTask(queriedTasksByIds);
+            List<Task> tasksToUpdate = contractTriggerService.closeTask(queriedTasksByIds);
+
+
+            if (tasksToUpdate.size() > 0) {
+                update tasksToUpdate;
+            }
         }
     }
 }
