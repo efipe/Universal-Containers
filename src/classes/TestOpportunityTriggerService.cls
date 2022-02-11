@@ -19,13 +19,13 @@ private class TestOpportunityTriggerService {
         update opportunity;
         Test.stopTest();
 
-        List<Task> tasks = [SELECT Id, Subject, WhatId, OwnerId, Type__c, ActivityDate FROM Task];
+        List<Task> tasks = [SELECT Id, Subject, WhatId, OwnerId, Type__c, ActivityDate FROM Task WHERE WhatId = :opportunity.Id] ;
 
         System.assertEquals(1, tasks.size());
         for (Task task : tasks) {
             System.assertEquals(task.Subject, 'Create contract for opportunity ' + opportunity.Name);
             System.assertEquals(task.WhatId, opportunity.Id);
-            System.assertEquals(task.ActivityDate, Date.today()+14);
+            System.assertEquals(task.ActivityDate, Date.today() + 14);
             System.assertEquals(task.OwnerId, opportunity.OwnerId);
         }
 
