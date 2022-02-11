@@ -30,6 +30,10 @@
 
     <!-- check if boolean isTrue and then draw table -->
 
+    <aura:if isTrue="{!v.isSpinnerNeeded}">
+        <lightning:spinner size="medium"/>
+    </aura:if>
+
     <aura:if isTrue="{!v.isSecondFormReady}">
         <aura:if isTrue="{!v.isScheduleFound}">
             <lightning:datatable data="{!v.Schedule}" onrowselection="{!c.onSelectedSchedule}"

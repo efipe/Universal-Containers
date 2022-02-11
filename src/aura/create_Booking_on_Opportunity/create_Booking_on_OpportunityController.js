@@ -29,21 +29,25 @@
 
         getListOfPossibleSchedules.setCallback(this, function (data) {
 
+            setTimeout(() => {
+                500
 
-            returnedSchedules = data.getReturnValue();
-            component.set("v.Schedule", data.getReturnValue());
-            component.set("v.isSecondFormReady", "True");
-            console.log(returnedSchedules.length);
+                returnedSchedules = data.getReturnValue();
+                component.set("v.Schedule", data.getReturnValue());
+                component.set("v.isSecondFormReady", "True");
+                console.log(returnedSchedules.length);
 
-            if (returnedSchedules.length > 0) {
-                component.set("v.isScheduleFound", true);
-                console.log("Schedule found");
-            } else {
-                console.log("Schedule NOT FOUND")
-                component.set("v.isScheduleFound", false);
-            }
-            component.set("v.isSpinnerNeeded", "false");
+                if (returnedSchedules.length > 0) {
+                    component.set("v.isScheduleFound", true);
+                    console.log("Schedule found");
+                } else {
+                    console.log("Schedule NOT FOUND")
+                    component.set("v.isScheduleFound", false);
+                }
+                component.set("v.isSpinnerNeeded", false);
+            }, 250 )
         });
+        component.set("v.isSpinnerNeeded", "true");
         $A.enqueueAction(getListOfPossibleSchedules);
     },
 

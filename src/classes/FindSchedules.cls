@@ -24,12 +24,9 @@ public with sharing class FindSchedules {
                 .addWhere('Route__r.Port_of_Origin__c', departure, '=')
                 .addWhere('Route__r.Port_of_Destination__c', arrival, '=')
                 .build();
-
         System.debug(query);
 
         List<Schedule__c> schedules = stringQueryBuilder.query();
-
-
 
         List<ScheduleWrapper> wrappedSchedules = FindSchedules.getRelatedObjectsNames(schedules);
         return wrappedSchedules;
