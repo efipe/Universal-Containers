@@ -29,6 +29,5 @@ private class TestOpportunityTriggerService {
             System.assertEquals(task.OwnerId, opportunity.OwnerId);
         }
 
-
     }
 }
