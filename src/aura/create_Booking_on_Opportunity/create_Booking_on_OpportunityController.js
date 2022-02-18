@@ -31,7 +31,7 @@
 
             setTimeout(() => {
                 500
-
+                console.log(data.getReturnValue());
                 returnedSchedules = data.getReturnValue();
                 component.set("v.Schedule", data.getReturnValue());
                 component.set("v.isSecondFormReady", "True");
@@ -45,9 +45,10 @@
                     component.set("v.isScheduleFound", false);
                 }
                 component.set("v.isSpinnerNeeded", false);
-            }, 250 )
+            }, 250)
         });
         component.set("v.isSpinnerNeeded", "true");
+
         $A.enqueueAction(getListOfPossibleSchedules);
     },
 

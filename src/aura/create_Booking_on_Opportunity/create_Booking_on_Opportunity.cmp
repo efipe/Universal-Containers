@@ -2,7 +2,7 @@
                 implements="force:hasRecordId,lightning:actionOverride,force:lightningQuickAction">
 
     <aura:attribute name="recordId" type="String"/>
-    <aura:attribute name="Schedule" type="ScheduleWrapper"/>
+    <aura:attribute name="Schedule" type="Schedule__c"/>
     <aura:attribute name="Columns" type="List"/>
     <aura:attribute name="maxRowsSelection" type="Integer" default="1"/>
     <aura:attribute name="scheduleStartDate" type="Date"/>
@@ -17,13 +17,13 @@
 
 
     <!-- 1st form - Enter dates & ports to look for a schedule -->
-        <lightning:card title="Schedule a Booking">
-            <lightning:input type="date" label="Date of Departure" value="{!v.scheduleStartDate}"/>
-            <lightning:input type="date" label="Date of Arrival" value="{!v.scheduleEndDate}"/>
-            <lightning:recordEditForm objectApiName="Route__c">
-                <lightning:inputField fieldName="Port_of_Origin__c" value="{!v.departurePort}"/>
-                <lightning:inputField fieldName="Port_of_Destination__c" value="{!v.arrivalPort}"/>
-            </lightning:recordEditForm>
+    <lightning:card title="Schedule a Booking">
+        <lightning:input type="date" label="Date of Departure" value="{!v.scheduleStartDate}"/>
+        <lightning:input type="date" label="Date of Arrival" value="{!v.scheduleEndDate}"/>
+        <lightning:recordEditForm objectApiName="Route__c">
+            <lightning:inputField fieldName="Port_of_Origin__c" value="{!v.departurePort}"/>
+            <lightning:inputField fieldName="Port_of_Destination__c" value="{!v.arrivalPort}"/>
+        </lightning:recordEditForm>
 
         <lightning:button label="Search" title="Search for Schedules" onclick="{!c.getSchedule}"/>
     </lightning:card>
@@ -31,14 +31,14 @@
     <!-- check if boolean isTrue and then draw table -->
 
     <aura:if isTrue="{!v.isSpinnerNeeded}">
-        <lightning:spinner size="medium"/>
+        <lightning:spinner size="small"/>
     </aura:if>
 
     <aura:if isTrue="{!v.isSecondFormReady}">
         <aura:if isTrue="{!v.isScheduleFound}">
             <lightning:datatable data="{!v.Schedule}" onrowselection="{!c.onSelectedSchedule}"
                                  columns="{!v.Columns }"
-                                 keyField="Id" maxRowSelection="{!v.maxRowSelection}"/>
+                                 keyField="Id" maxRowSelection="{!v.maxRowsSelection}"/>
 
             <!-- Second Form and check if another boolean isTrue  -->
             <aura:if isTrue="{!v.isScheduleSelected}">

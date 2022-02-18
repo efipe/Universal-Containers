@@ -35,10 +35,15 @@ public with sharing class FindSchedules {
 
 
     public static List<ScheduleWrapper> getRelatedObjectsNames(List<Schedule__c> scheds) {
-        ScheduleWrapper wrapper = new ScheduleWrapper();
+        System.debug(scheds);
+
+
         List<ScheduleWrapper> wrappedSchedules = new List<ScheduleWrapper>();
 
+        System.debug(scheds);
         for (Schedule__c schedule : scheds) {
+
+            ScheduleWrapper wrapper = new ScheduleWrapper();
             wrapper.id = schedule.Id;
             wrapper.scheduleName = schedule.Name;
             wrapper.scheduleStartDate = schedule.Departure_date__c;
@@ -46,9 +51,11 @@ public with sharing class FindSchedules {
             wrapper.routeName = schedule.Route__r.Name;
             wrapper.vesselName = schedule.Vessel__r.Name;
             wrappedSchedules.add(wrapper);
-        }
-        return wrappedSchedules;
-    }
 
+        }
+        System.debug(wrappedSchedules);
+        return wrappedSchedules;
+
+    }
 
 }
