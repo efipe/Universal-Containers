@@ -5,11 +5,12 @@
 public with sharing class OpportunityTriggerService {
 
     public List<Task> createNewTaskForOpportunity (List<Opportunity> oppList){
-        Task newTask = new Task();
+
         List<Task> newTasksToAdd = new List<Task>();
 
         for (Opportunity opportunity : oppList) {
             if (opportunity.StageName == 'Closed Won') {
+                Task newTask = new Task();
                 String taskName = 'Create contract for opportunity ' + opportunity.Name;
                 newTask.OwnerId = opportunity.OwnerId;
                 newTask.Subject = taskName;

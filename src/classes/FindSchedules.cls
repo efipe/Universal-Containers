@@ -23,6 +23,7 @@ public with sharing class FindSchedules {
                 .addWhere('Arrival_date__c', endDate, '=')
                 .addWhere('Route__r.Port_of_Origin__c', departure, '=')
                 .addWhere('Route__r.Port_of_Destination__c', arrival, '=')
+                .addWhere('Schedule_Status__c', 'Before Transit', '=')
                 .build();
         System.debug(query);
 

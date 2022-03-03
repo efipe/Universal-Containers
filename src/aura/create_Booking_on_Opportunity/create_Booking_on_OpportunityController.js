@@ -62,9 +62,20 @@
     },
 
     createBooking: function (component, event, helper) {
+        var toastEvent = $A.get("e.force:showToast");
+        toastEvent.setParams({
+            "title": "Success!",
+            "message": "Reservation Created Successfully",
+            "type": "success"
+        });
+        toastEvent.fire();
         $A.get("e.force:refreshView").fire();
         $A.get("e.force:closeQuickAction").fire();
-    }
+    },
 
+
+    cancelClick :  function (component, event, helper) {
+        $A.get("e.force:closeQuickAction").fire();
+    },
 
 })

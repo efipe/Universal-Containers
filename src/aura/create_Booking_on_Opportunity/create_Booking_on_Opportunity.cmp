@@ -1,5 +1,5 @@
 <aura:component controller="FindSchedules"
-                implements="force:hasRecordId,lightning:actionOverride,force:lightningQuickAction">
+                implements="force:hasRecordId,lightning:actionOverride,force:lightningQuickActionWithoutHeader">
 
     <aura:attribute name="recordId" type="String"/>
     <aura:attribute name="Schedule" type="Schedule__c"/>
@@ -14,22 +14,32 @@
     <aura:attribute name="isScheduleSelected" type="Boolean" default="false"/>
     <aura:attribute name="selectedSchedule" type="String"/>
     <aura:attribute name="isSpinnerNeeded" type="Boolean" default="false"/>
+    <aura:html tag="style">
+        .slds-modal__container{
+        width: 100%;
+        max-width: 50vw;
+        }
 
-
+        .slds-modal__content{
+        height: auto !important;
+        max-height: 1000px;
+        }
+    </aura:html>
     <!-- 1st form - Enter dates & ports to look for a schedule -->
-    <lightning:card title="Schedule a Booking">
+    <lightning:card>
+        <div class="slds-modal__header">
+            <h2 class="slds-modal__title slds-hyphenate">Schedule Booking</h2>
+        </div>
         <lightning:input type="date" label="Date of Departure" value="{!v.scheduleStartDate}"/>
         <lightning:input type="date" label="Date of Arrival" value="{!v.scheduleEndDate}"/>
         <lightning:recordEditForm objectApiName="Route__c">
             <lightning:inputField fieldName="Port_of_Origin__c" value="{!v.departurePort}"/>
             <lightning:inputField fieldName="Port_of_Destination__c" value="{!v.arrivalPort}"/>
         </lightning:recordEditForm>
-
         <lightning:button label="Search" title="Search for Schedules" onclick="{!c.getSchedule}"/>
     </lightning:card>
 
     <!-- check if boolean isTrue and then draw table -->
-
     <aura:if isTrue="{!v.isSpinnerNeeded}">
         <lightning:spinner size="small"/>
     </aura:if>
@@ -39,7 +49,6 @@
             <lightning:datatable data="{!v.Schedule}" onrowselection="{!c.onSelectedSchedule}"
                                  columns="{!v.Columns }"
                                  keyField="Id" maxRowSelection="{!v.maxRowsSelection}"/>
-
             <!-- Second Form and check if another boolean isTrue  -->
             <aura:if isTrue="{!v.isScheduleSelected}">
                 <lightning:card title="Provide booking details">
@@ -50,19 +59,19 @@
                         <lightning:inputField fieldName="Opportunity__c" value="{!v.recordId}" class="slds-hidden"/>
                         <lightning:inputField fieldName="Schedule__c" value="{!v.selectedSchedule}"
                                               class="slds-hidden"/>
-                        <lightning:button type="submit" label="Create Booking"/>
+                        <footer>
+                            <div class="modal-footer slds-modal__footer attach-to-bottom">
+                                <button class="slds-button slds-button_neutral" onclick="{!c.cancelClick}">Cancel</button>
+                                <button class="slds-button slds-button_brand" type="submit">Save</button>
+                            </div>
+                        </footer>
                     </lightning:recordEditForm>
                 </lightning:card>
             </aura:if>
-
             <aura:set attribute="else">
                 <lightning:card title="No matching schedules found"/>
             </aura:set>
-
         </aura:if>
-
     </aura:if>
-
-
 </aura:component>
 

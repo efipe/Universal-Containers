@@ -4,6 +4,8 @@
 
 public with sharing class ScheduleBookingService {
 
+    /*
+
     public List<Id> getAffectedOpportunitiesIds(List<Schedule_booking__c> bookingsProcessed) {
         List<Id> opportunitiesToUpdateIds = new List<Id>();
 
@@ -40,8 +42,9 @@ public with sharing class ScheduleBookingService {
                     if (Trigger.isInsert) {
                         opportunity.Amount__c += booking.Amount__c;
                     } else if (Trigger.isUpdate) {
-                        Decimal difference = booking.Amount__c - oldBookingValues.get(booking.Name);
-                        opportunity.Amount__c = opportunity.Amount__c + difference;
+                        Decimal difference = getZeroIfNull(booking.Amount__c) - getZeroIfNull(oldBookingValues.get(booking.Name));
+                        // Decimal difference = booking.Amount__c - oldBookingValues.get(booking.Name);
+                        opportunity.Amount__c = getZeroIfNull(opportunity.Amount__c) + getZeroIfNull(difference);
                     }
                 }
             }
@@ -132,5 +135,9 @@ public with sharing class ScheduleBookingService {
         return schedules;
     }
 
+    private Decimal getZeroIfNull(Decimal num){
+        return num == null ? 0 : num;
+    }
 
+*/
 }

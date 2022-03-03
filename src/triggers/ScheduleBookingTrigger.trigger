@@ -4,6 +4,8 @@
 
 trigger ScheduleBookingTrigger on Schedule_booking__c (after insert, after update) {
 
+    /*
+
     if (Trigger.isInsert || Trigger.isUpdate) {
         ScheduleBookingService service = new ScheduleBookingService();
 
@@ -20,5 +22,7 @@ trigger ScheduleBookingTrigger on Schedule_booking__c (after insert, after updat
         update schedulesToUpdate;
 
     }
+*/
+
 
 }
