@@ -1,6 +1,5 @@
 public with sharing class CaseRoutingService {
     
-    
     private static final Map<String, SObjectField> languageToQueueMap = new Map<String,SObjectField>{
         	'English' => Routing_Configuration__mdt.Routing_English__c,
             'German' => Routing_Configuration__mdt.Routing_German__c,
@@ -9,23 +8,22 @@ public with sharing class CaseRoutingService {
             'Italian' => Routing_Configuration__mdt.Routing_Italian__c,
             'Portuguese' => Routing_Configuration__mdt.Routing_Portuguese__c
     };
-    // static instance of the class
+
     private static CaseRoutingService instance;
-    private static Map <Id, Group> developerNameMap;
+    private static Map <String, Group> developerNameMap;
     private static Map <Id, Group> queues;
     
-    // private constructor to avoid creating instance outside of this class
     private CaseRoutingService(){
-        developerNameMap = new Map <Id,Group>();
+        developerNameMap = new Map <String,Group>();
         queues = new Map <Id, Group>([SELECT Id, DeveloperName from GROUP where Type = 'Queue']);
         
-        // Store queues
-        for (Id queueId : queues.keySet()){
-            developerNameMap.put(queueId, queues.get(queueId));
+        for (Group queue : queues.values()){
+            developerNameMap.put(queue.DeveloperName, queue);
         }
+        System.debug(developerNameMap);
+        System.debug(queues);
     }
     
-    // getter for the instance
     public static CaseRoutingService getInstance(){
         if(instance == null){
            instance = new CaseRoutingService();
@@ -33,25 +31,30 @@ public with sharing class CaseRoutingService {
         return instance;
     }
     
-    
-    // method to get appropiate Queue
     public Id getQueueForCase(Case incomingCase){
         
-        if (!queues.containsKey((String) incomingCase.OwnerId)) {
-            return null;
+        if (!queues.containsKey((String) incomingCase.OwnerId)){
+            System.debug('incomingCase Owner id is null');
+        return null;
         }
         
-       Routing_Configuration__mdt metadataConfig = CaseRoutingConfiguration.getInstance().getRoutingData(queues.get((String) incomingCase.OwnerId ).DeveloperName);
+       Routing_Configuration__mdt metadataConfig = CaseRoutingConfiguration.getInstance().getRoutingData(queues.get(incomingCase.OwnerId).DeveloperName);
+       System.debug(metadataConfig);
         
        
-        if (metadataConfig == null){
+        if (!(metadataConfig == null)){
             SObjectField languageToGet = languageToQueueMap.get(incomingCase.Preferred_Language__c);
+            System.debug(incomingCase.Preferred_language__c);
             String config = (String) metadataConfig.get(languageToGet);
             Group routedQueue = developerNameMap.get(config);
-            
             return routedQueue != null ? routedQueue.Id : null;
         }
        
+        return null;
+    }
+
+    public Id getDefaultQueue(Case incomingCase){
+        Routing_Configuration__mdt metadataConfig = CaseRoutingConfiguration.getInstance().getRoutingData(queues.get(incomingCase.OwnerId).DeveloperName);
         return null;
     }
    
