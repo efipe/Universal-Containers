@@ -6,6 +6,12 @@ public with sharing class CaseRoutingConfiguration {
     public Routing_Configuration__mdt getRoutingData(String queueDispatcherApiName){
     return configMap.get(queueDispatcherApiName);
     }
+
+    public List<Routing_Configuration__mdt> getAllRoutingConfig() {
+    return configMap.values();
+    }
+
+
     
     private CaseRoutingConfiguration(){
         configMap = new Map<String, Routing_Configuration__mdt>();
