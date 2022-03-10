@@ -30,11 +30,29 @@ public with sharing class CaseTriggerHelper {
                     if (newCase.Times_reopened__c != null) {
                         newCase.Times_reopened__c += 1;                                    
                     } else {
-                        newCase.Times_reopened__c = 0;
+                        newCase.Times_reopened__c = 1;
                     }
                 }
             }
         }
     }
+
+    public void setDateTimeOfLastStatusChange (List<Case> newCases, List<Case> oldCases){
+        for(Case newCase : newCases){
+            for (Case oldCase : oldCases) {
+                if (oldCase.Status != newCase.Status) {
+                    newCase.Last_status_change_date__c = Datetime.now();
+                }
+            }
+        }
+    }
+
+    public void setDateTimeOfLastStatusChange (List<Case> newCases){
+        for(Case newCase : newCases){
+                    newCase.Last_status_change_date__c = Datetime.now();
+            }
+        }
 }
+
+
 
