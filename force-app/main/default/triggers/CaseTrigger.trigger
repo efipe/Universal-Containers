@@ -10,5 +10,6 @@ trigger CaseTrigger on Case (before insert, before update, after insert, after u
             caseTriggerHelper.getQueueForCase(Trigger.new, Trigger.old);
             caseTriggerHelper.incrementTimesOpenedField(Trigger.new, Trigger.old);
             caseTriggerHelper.setDateTimeOfLastStatusChange(Trigger.new, Trigger.old);
+            CaseTriggerHelper.calculateTotalCloseDate(Trigger.new, Trigger.old);
        }
 }

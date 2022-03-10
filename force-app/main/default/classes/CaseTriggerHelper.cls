@@ -2,7 +2,7 @@ public with sharing class CaseTriggerHelper {
 
     public void getQueueForCase (List<Case> newCases, List<Case> oldCases){
         for (Case newCase : newCases){
-            if (newCase.OwnerId.getSobjectType() != User.getSObjectType()) {
+            if (newCase.OwnerId.getSobjectType() != User.getSObjectType()){
                 Id queueLanguageId = CaseRoutingService.getInstance().getQueueForCase(newCase);
                 if(queueLanguageId != null){
                     newCase.OwnerId = queueLanguageId;
@@ -14,7 +14,7 @@ public with sharing class CaseTriggerHelper {
     public void getDefaultQueue (List<Case> newCases, List<Case> oldCases){
         for (Case newCase : newCases) {
             for (Case oldCase : oldCases) {
-                if (oldCase.Preferred_language__c != newCase.Preferred_language__c) {
+                if (oldCase.Preferred_language__c != newCase.Preferred_language__c){
                     System.debug(newCase.OwnerId);
                     newCase.OwnerId = CaseRoutingService.getInstance().getdefaultQueue(oldCase.OwnerId, LanguageEnum.valueOf(oldCase.Preferred_language__c));
                     System.debug(newCase.OwnerId);
@@ -52,6 +52,17 @@ public with sharing class CaseTriggerHelper {
                     newCase.Last_status_change_date__c = Datetime.now();
             }
         }
+
+    public void calculateTotalCloseDate (List<Case> newCases, List<Case> oldCases){
+        String statusIndicatingClosed = 'Closed';
+        for(Case newCase : newCases){
+            for(Case oldCase: oldCases){
+                if (oldCase.Status == statusIndicatingClosed && newCase.Status != statusIndicatingClosed) {
+                    newCase.Closed_total_time__c = newCase.Closed_total_time__c += oldCase.Recent_close_time__c;
+                }
+            }
+        }
+    }
 }
 
 
